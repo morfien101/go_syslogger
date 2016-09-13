@@ -37,7 +37,8 @@ func main() {
 	// find logger
 	//loggger_location := exec.Output
 	// Create the command that will run.
-	longrunner := exec.Command("/bin/bash", os.Args[1])
+	longrunner := exec.Command("stdbuf", "-i0", "-o0", "-e0", os.Args[1])
+	longrunner.Env = []string{"PATH=/bin:/usr/bin"}
 
 	// Here we attach pipes to the STDOUT. We defer the close to
 	// clean up later.
